@@ -1,0 +1,23 @@
+{
+    "name": "thiagobrauer/laravel-kafka",
+    "description": "",
+    "authors": [
+        {
+            "name": "Thiago Brauer Ribeiro",
+            "email": "thiagobrauer@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ThiagoBrauer\\LaravelKafka\\" : "src/"
+        }
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "ThiagoBrauer\\LaravelKafka\\LaravelKafkaServiceProvider"
+        ]
+      }
+    }
+}
