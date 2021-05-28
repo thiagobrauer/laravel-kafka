@@ -16,6 +16,7 @@ return [
     ],
 
     'message_handlers' => [
-        App\Kafka\Handlers\KafkaMessageHandler::class
+        //
     ]
+
 ];
