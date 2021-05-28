@@ -2,10 +2,10 @@
 
 namespace ThiagoBrauer\LaravelKafka;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use ThiagoBrauer\LaravelKafka\Console\Commands\ConsumerCommand;
 
-class LaravelKafkaServiceProvider extends ServiceProvider
+class ServiceProvider extends LaravelServiceProvider
 {
     /**
      * Register services.
@@ -14,7 +14,9 @@ class LaravelKafkaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->publishes([
+            __DIR__.'/../config/laravel_kafka.php' => config_path('laravel_kafka.php')
+        ]);
     }
 
     /**

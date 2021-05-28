@@ -6,6 +6,6 @@ use RdKafka\Message;
 
 interface MessageHandlerInterface
 {
-    public function handle($message);
+    public function handle(string $message);
     public function processKafkaMessage(Message $message);
 }
