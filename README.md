@@ -59,17 +59,22 @@ class KafkaMessageHandler extends MessageHandler
 {
     public function handle(string $message)
     {
-        var_dump(json_decode($message->body));
+        var_dump(json_decode($message));
     }
 }
 ```
-Then, add your class to the `message_handlers` section of your `config/laravel_kafka.php` file:
+Then, add your class to the `message_handlers` section of your `config/laravel_kafka.php` file, organized by topic:
 
 ```php
 ...
 
 'message_handlers' => [
-        App\Kafka\Handlers\KafkaMessageHandler::class
+    'topic1' => [
+        App\Kafka\Handlers\KafkaMessageHandler::class   
+    ],
+    'topic2' => [
+        App\Kafka\Handlers\KafkaMessageHandler::class   
+    ]        
 ]
 
 ...
