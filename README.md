@@ -109,10 +109,10 @@ KAFKA_CONSUMER_AUTO_COMMIT=true
 php artisan kafka:consume --servers=kafka:9092
 php artisan kafka:consume --topics=inventories
 php artisan kafka:consume --group_id=group1
-php artisan kafka:consume --group_id=group1
 php artisan kafka:consume --timeout_ms=120000
 php artisan kafka:consume --auto_offset_reset=earliest
 php artisan kafka:consume --commit_async
+php artisan kafka:consume --auto_commit
 
 ```
 
