@@ -54,14 +54,16 @@ First, you need to create a class to handle the messages received. The class mus
 namespace App\Kafka\Handlers;
 
 use ThiagoBrauer\LaravelKafka\Handlers\MessageHandler;
+use RdKafka\Message;
 
 class KafkaMessageHandler extends MessageHandler
 {
-    public function handle(string $message)
+    public function handle(Message $message)
     {
-        var_dump(json_decode($message));
+        var_dump($message);
     }
 }
+
 ```
 Then, add your class to the `message_handlers` section of your `config/laravel_kafka.php` file, organized by topic:
 
