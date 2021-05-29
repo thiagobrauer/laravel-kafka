@@ -93,11 +93,11 @@ class KafkaProducer
      * Produce and send a single message to broker
      *
      * @param string $message
-     * @param mixed $key
      * @param array $headers
+     * @param mixed $key
      * @return void
      */
-    public function send(string $message, $key = null, array $headers = [])
+    public function send(string $message, array $headers = [], $key = null)
     {
         $this->buildPayload($message, $headers);
 
