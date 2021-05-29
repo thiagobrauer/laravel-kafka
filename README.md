@@ -2,7 +2,7 @@
 
 This package is based on [anam-hossain's example](https://engineering.carsguide.com.au/laravel-pub-sub-messaging-with-apache-kafka-3b27ed1ee5e8)
 
-### Installation
+## Installation
 
 1. Install the [librdkafka library](https://github.com/edenhill/librdkafka)
 
@@ -26,11 +26,12 @@ KAFKA_CONSUMER_SERVERS=kafka:9092
 KAFKA_CONSUMER_TOPICS=inventories
 KAFKA_CONSUMER_GROUP_ID=group1
 ```
+
 You can set multiple producer servers, consumer servers and consumer topics, using a `,` as separator.
 
-### Usage
+## Usage
 
-#### Producer
+### Producer
 
 To produce a message, just use the `KafkaProducer.php` class:
 
@@ -44,7 +45,7 @@ $producer new KafkaProducer()
 $producer->setTopic('topic1')->send('message');
 ```
 
-#### Consumer
+### Consumer
 
 First, you need to create a class to handle the messages received. The class must extend `ThiagoBrauer\LaravelKafka\Handlers\MessageHandler` and implement the method `handle`, like the example below:
 
@@ -85,6 +86,33 @@ Then, add your class to the `message_handlers` section of your `config/laravel_k
 and run `php artisan config:cache`
 
 After that, you're ready to start the consumer
-```
+```bash
 php artisan kafka:consume
 ```
+
+You can define the consumer configuration using variables in your `.env` file or command options:
+
+```
+KAFKA_PRODUCER_SERVERS=kafka:9092
+KAFKA_PRODUCER_DEBUG=true
+KAFKA_PRODUCER_COMPRESSION=snappy
+KAFKA_CONSUMER_SERVERS=kafka:9092
+KAFKA_CONSUMER_TOPICS=inventories
+KAFKA_CONSUMER_GROUP_ID=group1
+KAFKA_CONSUMER_COMMIT_ASYNC=true
+KAFKA_CONSUMER_TIMEOUT_MS=120000
+KAFKA_CONSUMER_AUTO_OFFSET_RESET=earliest
+KAFKA_CONSUMER_AUTO_COMMIT=true
+```
+
+```sh
+php artisan kafka:consume --servers=kafka:9092
+php artisan kafka:consume --topics=inventories
+php artisan kafka:consume --group_id=group1
+php artisan kafka:consume --group_id=group1
+php artisan kafka:consume --timeout_ms=120000
+php artisan kafka:consume --auto_offset_reset=earliest
+php artisan kafka:consume --commit_async
+
+```
+
