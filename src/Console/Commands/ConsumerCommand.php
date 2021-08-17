@@ -18,6 +18,7 @@ class ConsumerCommand extends Command
      * @var string
      */
     protected $signature = 'kafka:consume
+        {--once}
         {--servers=}
         {--topics=}
         {--group_id=}
@@ -57,6 +58,7 @@ class ConsumerCommand extends Command
             switch ($message->err) {
                 case RD_KAFKA_RESP_ERR_NO_ERROR:
                     foreach ($topics as $topic) {
+                        echo "Receiving message from topics " . implode(", ", $topics) . "\n";
                         if(isset($messageHandlers[$topic])) {
                             foreach ($messageHandlers[$topic] as $messageHandler) {
                                 $handler = new $messageHandler();
@@ -71,13 +73,19 @@ class ConsumerCommand extends Command
                     else
                         $consumer->commit($message);
 
+                    if($options['once'])
+                        return;
+
                     break;
+
                 case RD_KAFKA_RESP_ERR__PARTITION_EOF:
                     echo "No more messages; will wait for more\n";
                     break;
+
                 case RD_KAFKA_RESP_ERR__TIMED_OUT:
                     echo "Timed out\n";
                     break;
+
                 default:
                     throw new Exception($message->errstr(), $message->err);
                     break;
