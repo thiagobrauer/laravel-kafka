@@ -113,6 +113,7 @@ php artisan kafka:consume --timeout_ms=120000
 php artisan kafka:consume --auto_offset_reset=earliest
 php artisan kafka:consume --commit_async
 php artisan kafka:consume --auto_commit
+php artisan kafka:consume --once // consume only one message
 
 ```
 
