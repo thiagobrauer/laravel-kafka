@@ -58,7 +58,9 @@ class ConsumerCommand extends Command
             switch ($message->err) {
                 case RD_KAFKA_RESP_ERR_NO_ERROR:
                     foreach ($topics as $topic) {
-                        echo "Receiving message from topics " . implode(", ", $topics) . "\n";
+                        echo "Receiving message: topic_name " . $message->topic_name . ", offset " . $message->offset . "\n";
+                        echo "Message: " . json_encode($message) . "\n";
+
                         if(isset($messageHandlers[$topic])) {
                             foreach ($messageHandlers[$topic] as $messageHandler) {
                                 $handler = new $messageHandler();
